@@ -1,0 +1,31 @@
+{
+  "nodes": [
+    {"name": "Bloomington", "latitude": 40.4842, "longitude": -88.9937},
+    {"name": "Champaign", "latitude": 40.1164, "longitude": -88.2434},
+    {"name": "Chicago", "latitude": 41.8781, "longitude": -87.6298},
+    {"name": "Decatur", "latitude": 39.8403, "longitude": -88.9548},
+    {"name": "Danville", "latitude": 40.1245, "longitude": -87.6300},
+    {"name": "Joliet", "latitude": 41.5250, "longitude": -88.0817},
+    {"name": "Kankakee", "latitude": 41.1200, "longitude": -87.8612},
+    {"name": "Lincoln", "latitude": 40.1484, "longitude": -89.3648},
+    {"name": "Mattoon", "latitude": 39.4831, "longitude": -88.3728},
+    {"name": "Peoria", "latitude": 40.6936, "longitude": -89.5890},
+    {"name": "Springfield", "latitude": 39.7817, "longitude": -89.6501}
+  ],
+  "edges": [
+    {"node1": "Bloomington", "node2": "Champaign", "weight": 54},
+    {"node1": "Decatur", "node2": "Champaign", "weight": 54},
+    {"node1": "Danville", "node2": "Champaign", "weight": 35},
+    {"node1": "Lincoln", "node2": "Springfield", "weight": 37},
+    {"node1": "Decatur", "node2": "Springfield", "weight": 44},
+    {"node1": "Decatur", "node2": "Mattoon", "weight": 59},
+    {"node1": "Mattoon", "node2": "Champaign", "weight": 53},
+    {"node1": "Lincoln", "node2": "Peoria", "weight": 46},
+    {"node1": "Lincoln", "node2": "Bloomington", "weight": 36},
+    {"node1": "Kankakee", "node2": "Champaign", "weight": 75},
+    {"node1": "Kankakee", "node2": "Chicago", "weight": 62},
+    {"node1": "Joliet", "node2": "Chicago", "weight": 51},
+    {"node1": "Joliet", "node2": "Kankakee", "weight": 50},
+    {"node1": "Joliet", "node2": "Bloomington", "weight": 98}
+  ]
+}

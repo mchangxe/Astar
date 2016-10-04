@@ -1,5 +1,8 @@
+package cs126.mchang19.astar.CoordinateMap;
+
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+
 import java.io.FileReader;
 import java.util.List;
 
@@ -15,8 +18,8 @@ public class main {
         JsonReader reader = new JsonReader(jsonFileReader);
         Grid map = gson.fromJson(reader, Grid.class);
 
-        Position start = map.getStart();
-        Position end = map.getEnd();
+        Node start = map.getStart();
+        Node end = map.getEnd();
         List<String> checkPath = Astar.Astar(start, end, map);
         Astar.printPath(checkPath);
     }

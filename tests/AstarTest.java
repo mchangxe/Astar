@@ -1,9 +1,14 @@
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import cs126.mchang19.astar.CoordinateMap.Astar;
+import cs126.mchang19.astar.CoordinateMap.Grid;
+import cs126.mchang19.astar.CoordinateMap.Node;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
+import static cs126.mchang19.astar.CoordinateMap.Astar.*;
 import static org.junit.Assert.*;
 
 /**
@@ -32,9 +37,9 @@ public class AstarTest {
         JsonReader reader = new JsonReader(jsonFileReader);
         Grid map = gson.fromJson(reader, Grid.class);
 
-        Position start = map.getStart();
-        Position end = map.getEnd();
-        List<String> checkPath = Astar.Astar(start, end, map);
+        Node start = map.getStart();
+        Node end = map.getEnd();
+        List<String> checkPath = Astar(start, end, map);
         List<String> answer = new ArrayList<>();
         answer.add("3,2");
         answer.add("4,2");
@@ -68,9 +73,9 @@ public class AstarTest {
         JsonReader reader = new JsonReader(jsonFileReader);
         Grid map = gson.fromJson(reader, Grid.class);
 
-        Position start = map.getStart();
-        Position end = map.getEnd();
-        List<String> checkPath = Astar.Astar(start, end, map);
+        Node start = map.getStart();
+        Node end = map.getEnd();
+        List<String> checkPath = Astar(start, end, map);
         List<String> answer = new ArrayList<>();
         answer.add("0,8");
         answer.add("0,7");
@@ -97,9 +102,9 @@ public class AstarTest {
             JsonReader reader = new JsonReader(jsonFileReader);
             Grid map = gson.fromJson(reader, Grid.class);
 
-            Position start = map.getStart();
-            Position end = map.getEnd();
-            List<String> checkPath = Astar.Astar(start, end, map);
+            Node start = map.getStart();
+            Node end = map.getEnd();
+            List<String> checkPath = Astar(start, end, map);
         }catch (Exception e){
             assertTrue(e.equals("Exception in thread \"main\" java.lang.Exception: Something went wrong"));
         }
@@ -126,7 +131,7 @@ public class AstarTest {
         cameFromPath.put("1,2", "2,3");
         cameFromPath.put("2,3", "2,8");
         String endPoint = "1,2";
-        List<String> result = Astar.reconstruct_path(endPoint, cameFromPath);
+        List<String> result = reconstruct_path(endPoint, cameFromPath);
         List<String> answer = new ArrayList<String>(Arrays.asList("1,2", "2,3", "2,8"));
         assertTrue(result.equals(answer));
     }
@@ -141,7 +146,7 @@ public class AstarTest {
         cameFromPath.put("1,2", "2,3");
         cameFromPath.put("2,5", "2,8");
         String endPoint = "1,2";
-        List<String> result = Astar.reconstruct_path(endPoint, cameFromPath);
+        List<String> result =reconstruct_path(endPoint, cameFromPath);
         List<String> answer = new ArrayList<String>(Arrays.asList("1,2", "2,3", "2,8"));
         assertFalse(result.equals(answer));
     }
@@ -161,9 +166,9 @@ public class AstarTest {
      */
     @org.junit.Test
     public void dist_betweenTrue1() throws Exception {
-        Position x = new Position(0,0);
-        Position y = new Position(10,10);
-        assertTrue(Astar.dist_between(x,y) == 200);
+        Node x = new Node(0,0);
+        Node y = new Node(10,10);
+        assertTrue(dist_between(x,y) == 200);
     }
 
     /**
@@ -172,9 +177,9 @@ public class AstarTest {
      */
     @org.junit.Test
     public void dist_betweenTrue2() throws Exception {
-        Position x = new Position(5,5);
-        Position y = new Position(10,10);
-        assertTrue(Astar.dist_between(x,y) == 100);
+        Node x = new Node(5,5);
+        Node y = new Node(10,10);
+        assertTrue(dist_between(x,y) == 100);
     }
 
     /**
@@ -183,9 +188,9 @@ public class AstarTest {
      */
     @org.junit.Test
     public void dist_betweenTrue3() throws Exception {
-        Position x = new Position(-5,-5);
-        Position y = new Position(10,10);
-        assertTrue(Astar.dist_between(x,y) == 300);
+        Node x = new Node(-5,-5);
+        Node y = new Node(10,10);
+        assertTrue(dist_between(x,y) == 300);
     }
 
 
@@ -204,9 +209,9 @@ public class AstarTest {
      */
     @org.junit.Test
     public void heuristicCalcTrue1() throws Exception {
-        Position x = new Position(0,0);
-        Position y = new Position(10,10);
-        assertTrue(Astar.heuristicCalc(x,y) == 20);
+        Node x = new Node(0,0);
+        Node y = new Node(10,10);
+        assertTrue(heuristicCalc(x,y) == 20);
     }
 
     /**
@@ -215,9 +220,9 @@ public class AstarTest {
      */
     @org.junit.Test
     public void heuristicCalcTrue2() throws Exception {
-        Position x = new Position(-20,-20);
-        Position y = new Position(10,10);
-        assertTrue(Astar.heuristicCalc(x,y) == 60);
+        Node x = new Node(-20,-20);
+        Node y = new Node(10,10);
+        assertTrue(heuristicCalc(x,y) == 60);
     }
 
 

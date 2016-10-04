@@ -1,3 +1,5 @@
+package cs126.mchang19.astar.CoordinateMap;
+
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.lang.*;
@@ -16,12 +18,12 @@ public class Astar {
      * @param  endPoint The goal of the search
      * @return  A list of coordinates in the shortest path.
      */
-    public static List<String> Astar(Position startPoint, Position endPoint, Grid map) throws Exception,FileNotFoundException {
+    public static List<String> Astar(Node startPoint, Node endPoint, Grid map) throws Exception,FileNotFoundException {
 
         Set<String> closedSet = new HashSet<>();
         Set<String> openSet = new HashSet<>();
 
-        Position[] allObstacles = map.getObstacles();
+        Node[] allObstacles = map.getObstacles();
 
         Map<String,String> cameFrom = new HashMap();
 
@@ -39,7 +41,7 @@ public class Astar {
 
         while (!openSet.isEmpty()){
 
-            Position current = new Position(findLowestF(openSet, fScore));
+            Node current = new Node(findLowestF(openSet, fScore));
 
             //Compares the two coordinates in string form to avoid errors in comparing objects.
             if (current.getStringForm().equals(endPoint.getStringForm())){
@@ -51,7 +53,7 @@ public class Astar {
             current.findNeighbors(allObstacles, dimension);
 
 
-            for (Position currNeighbor: current.getNeighbors()){
+            for (Node currNeighbor: current.getNeighbors()){
 
                 if (closedSet.contains(currNeighbor.getStringForm())){
                     continue;
@@ -99,7 +101,7 @@ public class Astar {
      * @param endPoint The last point of the graph which should be the goal point of the search.
      * @return A list of coordinates of the path that is in the right direction from the starting point to end point.
      */
-    static List<String> reconstruct_path(String endPoint, Map<String, String> came){
+    public static List<String> reconstruct_path(String endPoint, Map<String, String> came){
         List<String> total_path = new ArrayList();
         total_path.add(endPoint);
         String current = endPoint;
@@ -118,7 +120,7 @@ public class Astar {
      * @param end The second point
      * @return The cost of moving from 1 point to 1 of its nearby neighbors.
      */
-    static int dist_between(Position start, Position end){
+    public static int dist_between(Node start, Node end){
         int distance =0;
         distance = (Math.abs(start.getX()-end.getX())) + (Math.abs(start.getY()-end.getY()));
         distance = distance * 10;
@@ -133,7 +135,7 @@ public class Astar {
      * @param end The second point
      * @return The distance between two points
      */
-    static int heuristicCalc(Position start, Position end){
+    public static int heuristicCalc(Node start, Node end){
 
         int horizontal = Math.abs(end.getX() - start.getX());
         int vertical = Math.abs(end.getY() - start.getY());
@@ -147,7 +149,7 @@ public class Astar {
      * @param open List of coordinates available
      * @return The coordinate with the lowest fScore in string format (x,y)
      */
-    static String findLowestF(Set<String> open, HashMap<String, Integer> fs){
+    public static String findLowestF(Set<String> open, HashMap<String, Integer> fs){
 
         int currFScore = Integer.MAX_VALUE;
         String lowestFPosition = null;
